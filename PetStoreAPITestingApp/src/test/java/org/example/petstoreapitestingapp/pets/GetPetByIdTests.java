@@ -9,10 +9,9 @@ import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import java.util.HashMap;
 import java.util.Map;
 
-public class TestGetPetById extends PetsTestBase {
+public class GetPetByIdTests extends PetsTestBase {
 
     private static final String PATH_UNDER_TEST = "pet/{petId}";
 
