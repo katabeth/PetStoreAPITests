@@ -3,6 +3,7 @@ package org.example.petstoreapitestingapp.pets;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
+import org.example.petstoreapitestingapp.RequestUtils;
 import org.example.petstoreapitestingapp.pojo.Category;
 import org.example.petstoreapitestingapp.pojo.Pet;
 import org.example.petstoreapitestingapp.pojo.TagsItem;
@@ -19,6 +20,7 @@ public class addAndUpdateNewPets extends PetsTestBase{
     private static Pet newPet;
     private static Pet updatePet;
     private static TagsItem tagsItem;
+    private static final String PATH = "/pet";
 
     @BeforeAll
     public static void setUp() {
@@ -50,11 +52,11 @@ public class addAndUpdateNewPets extends PetsTestBase{
     @DisplayName("Add new pet to the store")
     public void addNewPet() {
         response = RestAssured
-                .given()
-                .baseUri(PetsTestBase.BASE_URI)
-                .basePath("/pet")
-                .contentType(ContentType.JSON)
-                .body(newPet)
+                .given(RequestUtils.petRequestSpec(
+                PetsTestBase.BASE_URI,
+                PATH,
+                newPet
+                ))
                 .when()
                 .post()
                 .thenReturn();
@@ -73,11 +75,11 @@ public class addAndUpdateNewPets extends PetsTestBase{
     @DisplayName("Update pet in the store")
     public void updatePet() {
         response = RestAssured
-                .given()
-                .baseUri(PetsTestBase.BASE_URI)
-                .basePath("/pet")
-                .contentType(ContentType.JSON)
-                .body(updatePet)
+                .given(RequestUtils.petRequestSpec(
+                        PetsTestBase.BASE_URI,
+                        PATH,
+                        newPet
+                ))
                 .when()
                 .put()
                 .thenReturn();
