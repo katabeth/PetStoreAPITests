@@ -12,6 +12,7 @@ public class UserTestBase extends TestBase {
     protected static final String GET_USER_PATH = "/user/{username}";
     protected String username;
     protected static User userResponse;
+    protected static User[] userResponseList;
 
     protected static Response getUserByUsername(String username) {
         return RestAssured
