@@ -1,8 +1,6 @@
 package org.example.petstoreapitestingapp.store.order;
 
-import io.restassured.RestAssured;
 import io.restassured.response.Response;
-import org.example.petstoreapitestingapp.RequestUtils;
 import org.example.petstoreapitestingapp.pojo.Order;
 import org.example.petstoreapitestingapp.store.StoreTestBase;
 import org.hamcrest.MatcherAssert;
@@ -11,36 +9,13 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.Map;
-
 public class PostStoreOrderTests extends StoreTestBase {
     private static Response response;
-    private static final String BASE_URL = BASE_URI;
 
     @BeforeAll
     public static void beforeAll() {
         response =
-                RestAssured
-                        .given(RequestUtils.postRequestSpec(
-                                BASE_URI,
-                                "/store/order",
-                                Map.of(
-                                        "Accept", "application/json",
-                                        "Content-Type", "application/json"
-                                ),
-                                Map.of(),
-                                Map.of(
-                                        "id", 10,
-                                        "petId", 198772,
-                                        "quantity", 7,
-                                        "shipDate", "2024-09-10T14:49:33.773Z",
-                                        "status", "approved",
-                                        "complete", true
-                                ))
-                        )
-                        .when()
-                        .post()
-                        .thenReturn();
+                postOrder(10, 198772, 7, "2024-09-10T14:49:33.773Z", "approved", true);
 
         orderResponse = response.as(Order.class);
     }
