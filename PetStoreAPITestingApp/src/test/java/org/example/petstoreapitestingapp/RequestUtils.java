@@ -16,6 +16,16 @@ public class RequestUtils {
                 .build();
     }
 
+    // overload method to make get request without passing an empty map
+    public static RequestSpecification getRequestSpec(String baseUri, String path, Map<String, String> pathParams) {
+        return getRequestSpec(baseUri, path, Map.of(), pathParams);
+    }
+
+    // overload method to make get request without passing any maps
+    public static RequestSpecification getRequestSpec(String baseUri, String path) {
+        return getRequestSpec(baseUri, path, Map.of(), Map.of());
+    }
+
     public static RequestSpecification postRequestSpec(String baseUri, String path, Map<String, String> headers, Map<String, String> pathParams, Map<String, ?> body) {
         return new RequestSpecBuilder()
                 .setBaseUri(baseUri)
