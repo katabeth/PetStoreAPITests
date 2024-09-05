@@ -47,39 +47,39 @@ public class GetPetStoreOrderIdTests extends StoreTestBase {
     }
 
     @Test
-    @DisplayName("Check if id is 10")
+    @DisplayName("Check if id is 1")
     public void checkId() {
         MatcherAssert.assertThat(orderResponse.getId(), Matchers.is(TEST_ORDER_ID));
     }
 
     @Test
-    @DisplayName("Check if petId is 198772")
+    @DisplayName("Check if petId is 1")
     public void checkPetId() {
-        MatcherAssert.assertThat(orderResponse.getPetId(), Matchers.is(555));
+        MatcherAssert.assertThat(orderResponse.getPetId(), Matchers.is(1));
     }
 
     @Test
-    @DisplayName("Check if quantity is 7")
+    @DisplayName("Check if quantity is 0")
     public void checkQuantity() {
-        MatcherAssert.assertThat(orderResponse.getQuantity(), Matchers.is(7));
+        MatcherAssert.assertThat(orderResponse.getQuantity(), Matchers.is(0));
     }
 
     @Test
-    @DisplayName("Check if status is approved")
+    @DisplayName("Check if status is placed")
     public void checkStatus() {
-        MatcherAssert.assertThat(orderResponse.getStatus(), Matchers.is("approved"));
+        MatcherAssert.assertThat(orderResponse.getStatus(), Matchers.is("placed"));
     }
 
     @Test
-    @DisplayName("Check if shipDate is 2024-09-10T14:49:33.773+00:00")
+    @DisplayName("Check if shipDate is 2023-10-01T00:00:00.000+00:00")
     public void checkShipDate() {
-        MatcherAssert.assertThat(orderResponse.getShipDate(), Matchers.containsString("2024-09-05T09:02:20.792"));
+        MatcherAssert.assertThat(orderResponse.getShipDate(), Matchers.containsString("2023-10-01T00:00:00.000"));
     }
 
     @Test
-    @DisplayName("Check if complete is true")
+    @DisplayName("Check if complete is false")
     public void checkComplete() {
-        MatcherAssert.assertThat(orderResponse.isComplete(), Matchers.is(true));
+        MatcherAssert.assertThat(orderResponse.isComplete(), Matchers.is(false));
     }
 
     @Test
