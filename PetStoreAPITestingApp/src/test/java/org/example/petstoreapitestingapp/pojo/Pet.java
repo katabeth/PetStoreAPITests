@@ -12,7 +12,7 @@ public class Pet{
 	private String name;
 
 	@JsonProperty("id")
-	private int id;
+	private long id;
 
 	@JsonProperty("category")
 	private Category category;
@@ -31,7 +31,7 @@ public class Pet{
 		return name;
 	}
 
-	public int getId(){
+	public long getId(){
 		return id;
 	}
 

@@ -20,7 +20,7 @@ public class User{
 	private String phone;
 
 	@JsonProperty("id")
-	private int id;
+	private long id;
 
 	@JsonProperty("email")
 	private String email;
@@ -48,7 +48,7 @@ public class User{
 		return phone;
 	}
 
-	public int getId(){
+	public long getId(){
 		return id;
 	}
 

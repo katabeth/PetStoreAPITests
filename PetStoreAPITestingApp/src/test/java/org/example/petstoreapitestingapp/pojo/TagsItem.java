@@ -8,13 +8,13 @@ public class TagsItem{
 	private String name;
 
 	@JsonProperty("id")
-	private int id;
+	private long id;
 
 	public String getName(){
 		return name;
 	}
 
-	public int getId(){
+	public long getId(){
 		return id;
 	}
 }
