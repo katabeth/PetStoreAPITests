@@ -3,6 +3,8 @@ package org.example.petstoreapitestingapp.pets;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.example.petstoreapitestingapp.RequestUtils;
+import org.example.petstoreapitestingapp.pojo.ApiResponse;
+import org.example.petstoreapitestingapp.pojo.Pet;
 import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.*;
 
@@ -12,7 +14,7 @@ import java.util.Map;
 public class updatePetByIDTests extends PetsTestBase {
     private static Response response;
     private static final String PATH = "/pet/{id}?";
-
+    private static Pet message;
     @BeforeAll
     public static void setUp() {
     }
@@ -37,12 +39,13 @@ public class updatePetByIDTests extends PetsTestBase {
                 .post()
                 .thenReturn();
         response.prettyPrint();
+        message = response.as(Pet.class);
         MatcherAssert.assertThat(response.getStatusCode(), org.hamcrest.Matchers.is(200));
     }
     @Test
     @Order(2)
     @DisplayName("Check update gives correct name")
     public void checkUpdateGivesCorrectName() {
-        MatcherAssert.assertThat(response.getBody().jsonPath().getString("name"), org.hamcrest.Matchers.is("Charles"));
+        MatcherAssert.assertThat(message.getName(), org.hamcrest.Matchers.is("Charles"));
     }
 }

@@ -20,4 +20,6 @@ public class TagsItem{
 		this.name = name;
 		this.id = id;
 	}
+
+	public TagsItem(){}
 }

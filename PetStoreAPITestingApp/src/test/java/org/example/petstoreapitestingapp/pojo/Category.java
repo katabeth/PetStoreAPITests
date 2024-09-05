@@ -14,7 +14,7 @@ public class Category{
 		this.name = cats;
 		this.id = i;
 	}
-
+	public Category(){}
 	public String getName(){
 		return name;
 	}

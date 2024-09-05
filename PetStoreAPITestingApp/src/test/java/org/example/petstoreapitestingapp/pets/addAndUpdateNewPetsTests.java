@@ -18,6 +18,7 @@ public class addAndUpdateNewPetsTests extends PetsTestBase{
     private static Pet newPet;
     private static Pet updatePet;
     private static TagsItem tagsItem;
+    private static Pet returnedPet;
     private static final String PATH = "/pet";
 
     @BeforeAll
@@ -58,14 +59,14 @@ public class addAndUpdateNewPetsTests extends PetsTestBase{
                 .when()
                 .post()
                 .thenReturn();
-
+        returnedPet = response.as(Pet.class);
         MatcherAssert.assertThat(response.getStatusCode(), org.hamcrest.Matchers.is(200));
     }
     @Test
     @Order(2)
     @DisplayName("Check added pet gives correct name")
     public void checkAddedPetGivesCorrectName() {
-        MatcherAssert.assertThat(response.getBody().jsonPath().getString("name"), org.hamcrest.Matchers.is("Lion"));
+        MatcherAssert.assertThat(returnedPet.getName(), org.hamcrest.Matchers.is("Lion"));
     }
 
     @Test
@@ -76,17 +77,18 @@ public class addAndUpdateNewPetsTests extends PetsTestBase{
                 .given(RequestUtils.petRequestSpec(
                         PetsTestBase.BASE_URI,
                         PATH,
-                        newPet
+                        updatePet
                 ))
                 .when()
                 .put()
                 .thenReturn();
+        returnedPet = response.as(Pet.class);
         MatcherAssert.assertThat(response.getStatusCode(), org.hamcrest.Matchers.is(200));
     }
     @Test
     @Order(4)
     @DisplayName("Check update gives correct name")
     public void checkUpdateGivesCorrectName() {
-        MatcherAssert.assertThat(response.getBody().jsonPath().getString("name"), org.hamcrest.Matchers.is("Potatoes"));
+        MatcherAssert.assertThat(returnedPet.getName(), org.hamcrest.Matchers.is("Potatoes"));
         }
 }

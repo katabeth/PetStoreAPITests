@@ -45,4 +45,5 @@ public class Pet{
 		this.tags = tags;
 		this.status = status;
 	}
+	public Pet(){}
 }
