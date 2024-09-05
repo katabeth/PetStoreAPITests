@@ -1,6 +1,7 @@
 package org.example.petstoreapitestingapp.users;
 
 import io.restassured.response.Response;
+import org.example.petstoreapitestingapp.TestBase;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeAll;
@@ -8,8 +9,8 @@ import org.junit.jupiter.api.Test;
 
 public class GetUserLoginTests extends UserTestBase {
     private static Response response = null;
-    private static final String TEST_USERNAME = "test";
-    private static final String TEST_PASSWORD = "abc123";
+    private static final String TEST_USERNAME = TestBase.USERNAME;
+    private static final String TEST_PASSWORD = TestBase.PASSWORD;
     private static String responseBody;
 
     @BeforeAll

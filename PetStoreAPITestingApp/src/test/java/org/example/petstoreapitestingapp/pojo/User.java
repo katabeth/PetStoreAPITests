@@ -21,8 +21,8 @@ public class User {
     @JsonProperty("phone")
     private String phone;
 
-    @JsonProperty("id")
-    private int id;
+	@JsonProperty("id")
+	private long id;
 
     @JsonProperty("email")
     private String email;
@@ -50,9 +50,9 @@ public class User {
         return phone;
     }
 
-    public int getId() {
-        return id;
-    }
+	public long getId(){
+		return id;
+	}
 
     public String getEmail() {
         return email;

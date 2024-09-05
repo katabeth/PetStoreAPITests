@@ -37,4 +37,12 @@ public class UserTestBase extends TestBase {
                 .get()
                 .thenReturn();
     }
+
+    protected static Response deleteUserByUsername(String username) {
+        return RestAssured
+                .given(RequestUtils.getRequestSpec(BASE_URI, GET_USER_PATH, Map.of("username", username)))
+                .auth().basic(USERNAME, PASSWORD)
+                .delete()
+                .thenReturn();
+    }
 }
