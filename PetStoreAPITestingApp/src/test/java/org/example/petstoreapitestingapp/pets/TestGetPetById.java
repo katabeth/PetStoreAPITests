@@ -15,31 +15,80 @@ import java.util.Map;
 public class TestGetPetById extends PetsTestBase {
 
     private static Response response;
+    private static final String PATH_UNDER_TEST = "pet/{petId}";
 
     @BeforeAll
     public static void beforeAll() {
-
-        Map<String, String> headers = new HashMap<>();
-
-        Map<String, String> pathParams = new HashMap<>();
-        headers.put("petId", "1");
-
         response = RestAssured
                 .given(RequestUtils.getRequestSpec(
-                        "https://petstore3.swagger.io/api/v3/",
-                        "pet/{petId}",
-                        pathParams,
-                        headers
+                        BASE_URI,
+                        PATH_UNDER_TEST,
+                        Map.of("petId", "1")
                 ))
                 .when()
                 .get()
                 .thenReturn();
         petResponse = response.as(Pet.class);
         response.prettyPrint();
+        System.out.println(response.headers());
     }
 
     @Test
     void testPetHasAnIdOf1() {
         MatcherAssert.assertThat(petResponse.getId(), Matchers.is(1));
+    }
+
+    @Test
+    void testResponseHasStatus200() {
+        MatcherAssert.assertThat(response.statusCode(), Matchers.is(200));
+    }
+
+    @Test
+    void testPetCategoryIsCats() {
+        MatcherAssert.assertThat(petResponse.getCategory().getName(), Matchers.equalTo("Cats"));
+    }
+
+    @Test
+    void testPetStatusIsAvailable() {
+        MatcherAssert.assertThat(petResponse.getStatus(), Matchers.equalTo("available"));
+    }
+
+    @Test
+    void testResponseHasCorrectHeaders() {
+        MatcherAssert.assertThat(response.getHeader("Content-Type"), Matchers.equalTo("application/json"));
+        MatcherAssert.assertThat(response.getHeader("Access-Control-Allow-Origin"), Matchers.equalTo("*"));
+    }
+
+    @Test
+    void testResponseBodyIsNotEmpty() {
+        MatcherAssert.assertThat(response.getBody().asString().length(), Matchers.greaterThan(0));
+    }
+
+    @Test
+    void testPetNotFound() {
+        Response notFoundResponse = RestAssured
+                .given(RequestUtils.getRequestSpec(
+                        BASE_URI,
+                        PATH_UNDER_TEST,
+                        Map.of("petId", "999999")
+                ))
+                .when()
+                .get()
+                .thenReturn();
+        MatcherAssert.assertThat(notFoundResponse.statusCode(), Matchers.is(404));
+    }
+
+    @Test
+    void testInvalidPetIdReturns400() {
+        Response badRequestResponse = RestAssured
+                .given(RequestUtils.getRequestSpec(
+                        BASE_URI,
+                        PATH_UNDER_TEST,
+                        Map.of("petId", "invalidFormat")
+                ))
+                .when()
+                .get()
+                .thenReturn();
+        MatcherAssert.assertThat(badRequestResponse.statusCode(), Matchers.is(400));
     }
 }
