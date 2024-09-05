@@ -37,6 +37,16 @@ public class RequestUtils {
                 .setBody(body)
                 .build();
     }
+    public static RequestSpecification postRequestSpecList(String baseUri, String path, Map<String, String> headers, Map<String, String> pathParams, Map<String, ?>[] body) {
+        return new RequestSpecBuilder()
+                .setBaseUri(baseUri)
+                .setBasePath(path)
+                .addHeaders(headers)
+                .addPathParams(pathParams)
+                .setContentType(ContentType.JSON)
+                .setBody(body)
+                .build();
+    }
     public static RequestSpecification petRequestSpec(String baseUri, String path, Pet body) {
         return new RequestSpecBuilder()
                 .setBaseUri(baseUri)
