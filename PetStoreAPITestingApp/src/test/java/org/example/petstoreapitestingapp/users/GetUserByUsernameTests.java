@@ -71,8 +71,8 @@ public class GetUserByUsernameTests extends UserTestBase {
         Response nonExistentResponse = getUserByUsername(nonExistentUsername);
 
         nonExistentResponse.prettyPrint();
-        MatcherAssert.assertThat(nonExistentResponse.getStatusCode(), Matchers.is(500));
-        MatcherAssert.assertThat(nonExistentResponse.getBody().asString(), Matchers.containsString("There was an error processing your request."));
+        MatcherAssert.assertThat(nonExistentResponse.getStatusCode(), Matchers.is(404));
+        MatcherAssert.assertThat(nonExistentResponse.getBody().asString(), Matchers.containsString("User not found"));
     }
 
     @Test
