@@ -22,8 +22,6 @@ public class StoreGetInventoryTests extends StoreTestBase {
                 .when()
                 .get()
                 .thenReturn();
-
-        response.prettyPrint();
     }
 
     @Test

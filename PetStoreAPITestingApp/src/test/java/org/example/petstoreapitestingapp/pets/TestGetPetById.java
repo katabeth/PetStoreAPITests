@@ -14,7 +14,6 @@ import java.util.Map;
 
 public class TestGetPetById extends PetsTestBase {
 
-    private static Response response;
     private static final String PATH_UNDER_TEST = "pet/{petId}";
 
     @BeforeAll
@@ -23,19 +22,18 @@ public class TestGetPetById extends PetsTestBase {
                 .given(RequestUtils.getRequestSpec(
                         BASE_URI,
                         PATH_UNDER_TEST,
-                        Map.of("petId", "1")
+                        Map.of("petId", "12")
                 ))
                 .when()
                 .get()
                 .thenReturn();
         petResponse = response.as(Pet.class);
         response.prettyPrint();
-        System.out.println(response.headers());
     }
 
     @Test
     void testPetHasAnIdOf1() {
-        MatcherAssert.assertThat(petResponse.getId(), Matchers.is(1));
+        MatcherAssert.assertThat(petResponse.getId(), Matchers.is(12));
     }
 
     @Test
@@ -44,7 +42,7 @@ public class TestGetPetById extends PetsTestBase {
     }
 
     @Test
-    void testPetCategoryIsCats() {
+    void testPetCategoryIsDogs() {
         MatcherAssert.assertThat(petResponse.getCategory().getName(), Matchers.equalTo("Cats"));
     }
 
