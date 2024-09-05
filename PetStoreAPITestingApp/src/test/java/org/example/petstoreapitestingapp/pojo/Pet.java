@@ -10,7 +10,9 @@ public class Pet{
 	@JsonProperty("name")
 	private String name;
 	@JsonProperty("id")
-	private int id;
+
+	private long id;
+
 	@JsonProperty("category")
 	private Category category;
 	@JsonProperty("tags")
@@ -24,15 +26,20 @@ public class Pet{
 	public String getName(){
 		return name;
 	}
-	public int getId(){
+
+	public long getId(){
+
 		return id;
 	}
+  
 	public Category getCategory(){
 		return category;
 	}
+  
 	public List<TagsItem> getTags(){
 		return tags;
 	}
+  
 	public String getStatus(){
 		return status;
 	}
