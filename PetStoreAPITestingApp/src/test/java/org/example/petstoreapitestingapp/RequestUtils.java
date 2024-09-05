@@ -21,6 +21,10 @@ public class RequestUtils {
         return getRequestSpec(baseUri, path, Map.of(), pathParams);
     }
 
+    public static RequestSpecification getRequestSpec(String baseUri, String path) {
+        return getRequestSpec(baseUri, path, Map.of());
+    }
+
     public static RequestSpecification postRequestSpec(String baseUri, String path, Map<String, String> headers, Map<String, String> pathParams, Map<String, ?> body) {
         return new RequestSpecBuilder()
                 .setBaseUri(baseUri)
