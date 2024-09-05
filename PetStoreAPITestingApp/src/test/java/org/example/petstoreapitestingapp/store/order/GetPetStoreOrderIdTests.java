@@ -15,28 +15,12 @@ import java.util.Map;
 
 public class GetPetStoreOrderIdTests extends StoreTestBase {
     private static Response response;
-    private static Order order;
+    private static final int TEST_ORDER_ID = 1;
 
     @BeforeAll
     public static void beforeAll() {
-        response =
-                RestAssured
-                        .given(RequestUtils.getRequestSpec(
-                                BASE_URI,
-                                "/store/order/{orderId}",
-                                Map.of(
-                                        "Accept", "application/json",
-                                        "Content-Type", "application/json"
-                                ),
-                                Map.of(
-                                        "orderId", "10"
-                                )
-                        ))
-                        .when()
-                        .get()
-                        .thenReturn();
-
-        order = response.as(Order.class);
+        response = getOrderById(TEST_ORDER_ID);
+        orderResponse = response.as(Order.class);
     }
 
     @Test
@@ -52,38 +36,70 @@ public class GetPetStoreOrderIdTests extends StoreTestBase {
     }
 
     @Test
+    public void validateResponseTime() {
+        long maxResponseTime = 2000L;
+        MatcherAssert.assertThat(response.getTime(), Matchers.lessThan(maxResponseTime));
+    }
+
+    @Test
+    public void validateResponseBodyNotEmpty() {
+        MatcherAssert.assertThat(response.getBody().asString().length(), Matchers.greaterThan(0));
+    }
+
+    @Test
     @DisplayName("Check if id is 10")
     public void checkId() {
-        MatcherAssert.assertThat(order.getId(), Matchers.is(10));
+        MatcherAssert.assertThat(orderResponse.getId(), Matchers.is(TEST_ORDER_ID));
     }
 
     @Test
     @DisplayName("Check if petId is 198772")
     public void checkPetId() {
-        MatcherAssert.assertThat(order.getPetId(), Matchers.is(555));
+        MatcherAssert.assertThat(orderResponse.getPetId(), Matchers.is(555));
     }
 
     @Test
     @DisplayName("Check if quantity is 7")
     public void checkQuantity() {
-        MatcherAssert.assertThat(order.getQuantity(), Matchers.is(7));
+        MatcherAssert.assertThat(orderResponse.getQuantity(), Matchers.is(7));
     }
 
     @Test
     @DisplayName("Check if status is approved")
     public void checkStatus() {
-        MatcherAssert.assertThat(order.getStatus(), Matchers.is("approved"));
+        MatcherAssert.assertThat(orderResponse.getStatus(), Matchers.is("approved"));
     }
 
     @Test
     @DisplayName("Check if shipDate is 2024-09-10T14:49:33.773+00:00")
     public void checkShipDate() {
-        MatcherAssert.assertThat(order.getShipDate(), Matchers.containsString("2024-09-05T09:02:20.792"));
+        MatcherAssert.assertThat(orderResponse.getShipDate(), Matchers.containsString("2024-09-05T09:02:20.792"));
     }
 
     @Test
     @DisplayName("Check if complete is true")
     public void checkComplete() {
-        MatcherAssert.assertThat(order.isComplete(), Matchers.is(true));
+        MatcherAssert.assertThat(orderResponse.isComplete(), Matchers.is(true));
+    }
+
+    @Test
+    public void validateNonExistentOrderIdReturns404() {
+        int nonExistentOrderId = 999999;
+        Response nonExistentResponse = getOrderById(nonExistentOrderId);
+
+        MatcherAssert.assertThat(nonExistentResponse.getStatusCode(), Matchers.is(404));
+        MatcherAssert.assertThat(nonExistentResponse.getBody().asString(), Matchers.containsString("Order not found"));
+    }
+
+    @Test
+    public void validateInvalidOrderIdReturns400() {
+        String invalidOrderId = "abc";
+        Response invalidResponse = RestAssured
+                .given(RequestUtils.getRequestSpec(BASE_URI, GET_ORDER_PATH, Map.of(), Map.of("orderId", invalidOrderId)))
+                .get()
+                .thenReturn();
+
+        MatcherAssert.assertThat(invalidResponse.getStatusCode(), Matchers.is(400));
+        MatcherAssert.assertThat(invalidResponse.jsonPath().getString("message"), Matchers.containsString("Input error: couldn't convert `" + invalidOrderId + "` to type `class java.lang.Long`"));
     }
 }
