@@ -16,7 +16,29 @@ public class StoreTestBase extends TestBase {
     protected static Order orderResponse;
     protected Order[] orders;
 
-
+    protected static Response postOrder(int id, int petId, int quantity, String shipDate, String status, boolean complete) {
+        return RestAssured
+                .given(RequestUtils.postRequestSpec(
+                        BASE_URI,
+                        "/store/order",
+                        Map.of(
+                                "Accept", "application/json",
+                                "Content-Type", "application/json"
+                        ),
+                        Map.of(),
+                        Map.of(
+                                "id", id,
+                                "petId", petId,
+                                "quantity", quantity,
+                                "shipDate", shipDate,
+                                "status", status,
+                                "complete", complete
+                        ))
+                )
+                .when()
+                .post()
+                .thenReturn();
+    }
 
     protected static Response getOrderById(int orderId) {
         return RestAssured
