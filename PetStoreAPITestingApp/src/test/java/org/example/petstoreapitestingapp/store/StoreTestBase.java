@@ -16,8 +16,6 @@ public class StoreTestBase extends TestBase {
     protected static Order orderResponse;
     protected Order[] orders;
 
-
-
     protected static Response getOrderById(int orderId) {
         return RestAssured
                 .given(RequestUtils.getRequestSpec(
