@@ -90,5 +90,5 @@ public class addAndUpdateNewPetsTests extends PetsTestBase{
     @DisplayName("Check update gives correct name")
     public void checkUpdateGivesCorrectName() {
         MatcherAssert.assertThat(returnedPet.getName(), org.hamcrest.Matchers.is("Potatoes"));
-        }
+    }
 }
