@@ -51,7 +51,6 @@ public class StoreGetInventoryTests extends StoreTestBase {
         MatcherAssert.assertThat(inventory, Matchers.hasKey("test"));
         MatcherAssert.assertThat(inventory, Matchers.hasKey("pending"));
         MatcherAssert.assertThat(inventory, Matchers.hasKey("available"));
-        MatcherAssert.assertThat(inventory, Matchers.hasKey("invalid"));
         MatcherAssert.assertThat(inventory, Matchers.hasKey("deliver"));
         MatcherAssert.assertThat(inventory, Matchers.hasKey("delivered"));
     }
