@@ -3,7 +3,6 @@ package org.example.petstoreapitestingapp.store.order;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.example.petstoreapitestingapp.RequestUtils;
-import org.example.petstoreapitestingapp.pojo.Order;
 import org.example.petstoreapitestingapp.store.StoreTestBase;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
@@ -16,6 +15,13 @@ import java.util.Map;
 public class DeletePetStoreOrderIdTests extends StoreTestBase {
 
     private static Response response;
+    private static final String PATH = "/store/order/{orderId}";
+    private static final Map<String, String> headers = Map.of(
+                                                        "Accept", "application/json",
+                                                        "Content-Type", "application/json"
+                                                        );
+    private static String orderId = "100";
+    private static Map<String, String> pathParams = Map.of("orderId", orderId);
 
     @BeforeAll
     public static void beforeAll() {
@@ -23,14 +29,9 @@ public class DeletePetStoreOrderIdTests extends StoreTestBase {
                 RestAssured
                         .given(RequestUtils.deleteRequestSpec(
                                 BASE_URI,
-                                "/store/order/{orderId}",
-                                Map.of(
-                                        "Accept", "application/json",
-                                        "Content-Type", "application/json"
-                                ),
-                                Map.of(
-                                        "orderId", "100"
-                                )
+                                PATH,
+                                headers,
+                                pathParams
                         ))
                         .when()
                         .delete()
@@ -53,17 +54,15 @@ public class DeletePetStoreOrderIdTests extends StoreTestBase {
     @Test
     @DisplayName("Check if invalid orderId returns 400")
     public void checkInvalidOrderId() {
+        orderId = "abc";
+        pathParams = Map.of("orderId", orderId);
+
         Response invalidResponse = RestAssured
                 .given(RequestUtils.deleteRequestSpec(
                         BASE_URI,
-                        "/store/order/{orderId}",
-                        Map.of(
-                                "Accept", "application/json",
-                                "Content-Type", "application/json"
-                        ),
-                        Map.of(
-                                "orderId", "10000"
-                        )
+                        PATH,
+                        headers,
+                        pathParams
                 ))
                 .when()
                 .delete()
