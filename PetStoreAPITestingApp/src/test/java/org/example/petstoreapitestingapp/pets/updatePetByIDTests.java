@@ -14,7 +14,7 @@ import java.util.Map;
 public class updatePetByIDTests extends PetsTestBase {
     private static Response response;
     private static final String PATH = "/pet/{id}?";
-    private static Pet message;
+    private static Pet returnedPet;
     @BeforeAll
     public static void setUp() {
     }
@@ -39,13 +39,19 @@ public class updatePetByIDTests extends PetsTestBase {
                 .post()
                 .thenReturn();
         response.prettyPrint();
-        message = response.as(Pet.class);
+        returnedPet = response.as(Pet.class);
         MatcherAssert.assertThat(response.getStatusCode(), org.hamcrest.Matchers.is(200));
     }
     @Test
     @Order(2)
     @DisplayName("Check update gives correct name")
     public void checkUpdateGivesCorrectName() {
-        MatcherAssert.assertThat(message.getName(), org.hamcrest.Matchers.is("Charles"));
+        MatcherAssert.assertThat(returnedPet.getName(), org.hamcrest.Matchers.is("Charles"));
+    }
+    @Test
+    @Order(3)
+    @DisplayName("Check update gives correct status")
+    public void checkUpdateGivesCorrectStatus() {
+        MatcherAssert.assertThat(returnedPet.getStatus(), org.hamcrest.Matchers.is("pending"));
     }
 }
