@@ -10,6 +10,11 @@ public class Category{
 	@JsonProperty("id")
 	private int id;
 
+	public Category(int i, String cats) {
+		this.name = cats;
+		this.id = i;
+	}
+
 	public String getName(){
 		return name;
 	}

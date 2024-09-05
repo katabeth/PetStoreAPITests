@@ -1,13 +1,18 @@
 package org.example.petstoreapitestingapp.pets;
 
 import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
 import io.restassured.response.Response;
+import org.example.petstoreapitestingapp.pojo.Category;
 import org.example.petstoreapitestingapp.pojo.Pet;
+import org.example.petstoreapitestingapp.pojo.TagsItem;
+import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
 import java.util.Map;
 
 public class addAndUpdateNewPets extends PetsTestBase{
@@ -26,19 +31,27 @@ public class addAndUpdateNewPets extends PetsTestBase{
     @Test
     @DisplayName("Add new pet to the store")
     public void addNewPet() {
-        Pet pet = new Pet(
-                10,,
-
+        TagsItem tagsItem = new TagsItem(0,"String");
+        Pet newPet = new Pet(
+                10,
+                "Lion",
+                new Category(2, "Cats"),
+                List.of("string"),
+                List.of(tagsItem),
+                "available"
         );
 
-        RestAssured
+        response = RestAssured
                 .given()
                 .baseUri(PetsTestBase.BASE_URI)
-                .basePath("/v2/pet")
-                .contentType("application/json")
-                .body(pet)
+                .basePath("/pet")
+                .contentType(ContentType.JSON)
+                .body(newPet)
+                .log().all()
                 .when()
                 .post()
+                .thenReturn();
+        MatcherAssert.assertThat(response.getStatusCode(), org.hamcrest.Matchers.is(200));
     }
 
 }
