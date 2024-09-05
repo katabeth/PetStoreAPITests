@@ -5,6 +5,6 @@ import org.example.petstoreapitestingapp.pojo.Pet;
 
 public abstract class PetsTestBase extends TestBase {
     protected Integer petId;
-    protected Pet petResponse;
-    protected Pet[] pets;
+    protected static Pet petResponse;
+    protected static Pet[] pets;
 }
