@@ -21,7 +21,7 @@ public class PostUserTests extends UserTestBase {
     );
     private static final Map<String, String> pathParams = Map.of();
     private static final Map<String, ?> body = Map.of(
-        "id", 101,
+        "id", 345,
         "username", "test",
         "firstName", "test",
         "lastName", "test",
@@ -40,12 +40,19 @@ public class PostUserTests extends UserTestBase {
                         headers,
                         pathParams,
                         body
-                ))
+                )).auth().basic(USERNAME, PASSWORD)
                 .when()
                 .post()
                 .thenReturn();
 
-        userResponse = response.as(User.class);
+        response.prettyPrint();
+
+        try {
+            userResponse = response.as(User.class);
+        } catch (Exception e) {
+            System.out.println("Defect found on api route: " + BASE_URI + PATH);
+        }
+
     }
 
     @Test
@@ -64,6 +71,12 @@ public class PostUserTests extends UserTestBase {
     @DisplayName("Check if server header is Jetty")
     public void checkServerHeader() {
         MatcherAssert.assertThat(response.headers().get("Server").getValue(), Matchers.containsString("Jetty"));
+    }
+
+    @Test
+    @DisplayName("Check if status code is 500 - found defect")
+    public void checkStatusCode() {
+        MatcherAssert.assertThat(response.statusCode(), Matchers.is(500));
     }
 
     @Test
