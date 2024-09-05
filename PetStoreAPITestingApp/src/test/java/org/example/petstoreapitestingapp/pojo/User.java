@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class User {
 
+    public User(String firstName, String lastName, String password, int userStatus, String phone, String id, String email, String username) {}
+
     @JsonProperty("firstName")
     private String firstName;
 
