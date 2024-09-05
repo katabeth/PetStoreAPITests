@@ -1,7 +1,6 @@
 package org.example.petstoreapitestingapp.pets;
 
 import io.restassured.RestAssured;
-import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.example.petstoreapitestingapp.RequestUtils;
 import org.example.petstoreapitestingapp.pojo.Category;
@@ -11,10 +10,9 @@ import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.*;
 
 import java.util.List;
-import java.util.Map;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class addAndUpdateNewPets extends PetsTestBase{
+public class addAndUpdateNewPetsTests extends PetsTestBase{
 
     private static Response response;
     private static Pet newPet;
@@ -53,7 +51,7 @@ public class addAndUpdateNewPets extends PetsTestBase{
     public void addNewPet() {
         response = RestAssured
                 .given(RequestUtils.petRequestSpec(
-                PetsTestBase.BASE_URI,
+                BASE_URI,
                 PATH,
                 newPet
                 ))
