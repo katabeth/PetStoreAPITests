@@ -62,6 +62,12 @@ public class PostUserTests extends UserTestBase {
     }
 
     @Test
+    public void validateResponseTime() {
+        long maxResponseTime = 2000L;
+        MatcherAssert.assertThat(response.getTime(), Matchers.lessThan(maxResponseTime));
+    }
+
+    @Test
     @DisplayName("Check if content-type is application/json")
     public void checkContentTypeHeader() {
         MatcherAssert.assertThat(response.headers().get("Content-Type").getValue(), Matchers.is("application/json"));
