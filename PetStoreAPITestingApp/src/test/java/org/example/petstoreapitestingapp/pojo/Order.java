@@ -11,7 +11,7 @@ public class Order{
 	private int quantity;
 
 	@JsonProperty("id")
-	private int id;
+	private long id;
 
 	@JsonProperty("shipDate")
 	private String shipDate;
@@ -30,7 +30,7 @@ public class Order{
 		return quantity;
 	}
 
-	public int getId(){
+	public long getId(){
 		return id;
 	}
 

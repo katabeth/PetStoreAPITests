@@ -24,10 +24,20 @@ public class RequestUtils {
 
     // overload method to make get request without passing any maps
     public static RequestSpecification getRequestSpec(String baseUri, String path) {
-        return getRequestSpec(baseUri, path, Map.of(), Map.of());
+        return getRequestSpec(baseUri, path, Map.of());
     }
 
     public static RequestSpecification postRequestSpec(String baseUri, String path, Map<String, String> headers, Map<String, String> pathParams, Map<String, ?> body) {
+        return new RequestSpecBuilder()
+                .setBaseUri(baseUri)
+                .setBasePath(path)
+                .addHeaders(headers)
+                .addPathParams(pathParams)
+                .setContentType(ContentType.JSON)
+                .setBody(body)
+                .build();
+    }
+    public static RequestSpecification postRequestSpecList(String baseUri, String path, Map<String, String> headers, Map<String, String> pathParams, Map<String, ?>[] body) {
         return new RequestSpecBuilder()
                 .setBaseUri(baseUri)
                 .setBasePath(path)
@@ -49,7 +59,7 @@ public class RequestUtils {
         return getRequestSpec(baseUri, path, headers, pathParams);
     }
 
-    public static RequestSpecification putRequestSpec(String baseUri, String path, Map<String, String> headers, Map<String, String> pathParams, Map<String,?> body) {
+    public static RequestSpecification putRequestSpec(String baseUri, String path, Map<String, String> headers, Map<String, String> pathParams, Map<String, ?> body) {
         return postRequestSpec(baseUri, path, headers, pathParams, body);
     }
 }
