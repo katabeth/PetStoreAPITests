@@ -4,7 +4,6 @@ import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class RequestUtils {
@@ -19,7 +18,7 @@ public class RequestUtils {
 
     // overload method to make get request without passing an empty hashmap
     public static RequestSpecification getRequestSpec(String baseUri, String path, Map<String, String> pathParams) {
-        return getRequestSpec(baseUri, path, new HashMap<>(), pathParams);
+        return getRequestSpec(baseUri, path, Map.of(), pathParams);
     }
 
     public static RequestSpecification postRequestSpec(String baseUri, String path, Map<String, String> headers, Map<String, String> pathParams, Map<String, ?> body) {
