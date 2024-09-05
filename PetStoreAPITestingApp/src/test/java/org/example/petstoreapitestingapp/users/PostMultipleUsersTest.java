@@ -94,5 +94,52 @@ public class PostMultipleUsersTest extends UserTestBase {
         MatcherAssert.assertThat(response.statusCode(), Matchers.is(500));
     }
 
+    @Test
+    @DisplayName("Check if id is 101")
+    public void checkId() {
+        MatcherAssert.assertThat(userResponseList[0].getId(), Matchers.is(345));
+    }
+
+    @Test
+    @DisplayName("Check if username is test")
+    public void checkUsername() {
+        MatcherAssert.assertThat(userResponseList[0].getUsername(), Matchers.is("test"));
+    }
+
+    @Test
+    @DisplayName("Check if firstName is test")
+    public void checkFirstName() {
+        MatcherAssert.assertThat(userResponseList[0].getFirstName(), Matchers.is("test"));
+    }
+
+    @Test
+    @DisplayName("Check if lastName is test")
+    public void checkLastName() {
+        MatcherAssert.assertThat(userResponseList[0].getLastName(), Matchers.is("test"));
+    }
+
+    @Test
+    @DisplayName("Check if email is test")
+    public void checkEmail() {
+        MatcherAssert.assertThat(userResponseList[0].getEmail(), Matchers.is("test"));
+    }
+
+    @Test
+    @DisplayName("Check if password is test")
+    public void checkPassword() {
+        MatcherAssert.assertThat(userResponseList[0].getPassword(), Matchers.is("test"));
+    }
+
+    @Test
+    @DisplayName("Check if phone is test")
+    public void checkPhone() {
+        MatcherAssert.assertThat(userResponseList[0].getPhone(), Matchers.is("test"));
+    }
+
+    @Test
+    @DisplayName("Check if userStatus is 1")
+    public void checkUserStatus() {
+        MatcherAssert.assertThat(userResponseList[0].getUserStatus(), Matchers.is(1));
+    }
 
 }
