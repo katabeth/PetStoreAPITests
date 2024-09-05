@@ -8,7 +8,7 @@ public class Category{
 	private String name;
 
 	@JsonProperty("id")
-	private int id;
+	private long id;
 
 	public Category(int i, String cats) {
 		this.name = cats;
@@ -19,7 +19,7 @@ public class Category{
 		return name;
 	}
 
-	public int getId(){
+	public long getId(){
 		return id;
 	}
 }
