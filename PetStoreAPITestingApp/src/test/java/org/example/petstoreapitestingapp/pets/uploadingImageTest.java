@@ -44,9 +44,10 @@ public class uploadingImageTest extends PetsTestBase{
                 .baseUri(BASE_URI)
                 .basePath(PATH)
                 .pathParam("petId", 55)
-                .multiPart("@file", file) // Attach the image as a multiPart field
-                .multiPart("additionalMetadata", "test metadata") // Add metadata as multipart field
-                .contentType(ContentType.MULTIPART) // Set content type as multipart/form-data
+                 // Attach the image as a multiPart field
+                 // Add metadata as multipart field
+                .contentType(ContentType.BINARY)// Set content type as multipart/form-data
+                .body(file)
                 .when()
                 .post() // API endpoint for uploading the image
                 .thenReturn();
