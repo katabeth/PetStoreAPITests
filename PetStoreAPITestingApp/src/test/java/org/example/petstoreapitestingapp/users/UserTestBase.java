@@ -5,6 +5,6 @@ import org.example.petstoreapitestingapp.pojo.User;
 
 public class UserTestBase extends TestBase {
     protected String username;
-    protected User userResponse;
+    protected static User userResponse;
     protected User[] users;
 }

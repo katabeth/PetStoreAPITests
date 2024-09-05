@@ -15,7 +15,6 @@ import java.util.Map;
 
 public class PostStoreOrderTests extends StoreTestBase {
     private static Response response;
-    private static Order order;
     private static final String BASE_URL = BASE_URI;
 
     @BeforeAll
@@ -43,7 +42,7 @@ public class PostStoreOrderTests extends StoreTestBase {
                         .post()
                         .thenReturn();
 
-        order = response.as(Order.class);
+        orderResponse = response.as(Order.class);
     }
 
     @Test
@@ -67,37 +66,37 @@ public class PostStoreOrderTests extends StoreTestBase {
     @Test
     @DisplayName("Check if id is 10")
     public void checkId() {
-        MatcherAssert.assertThat(order.getId(), Matchers.is(10));
+        MatcherAssert.assertThat(orderResponse.getId(), Matchers.is(10));
     }
 
     @Test
     @DisplayName("Check if petId is 198772")
     public void checkPetId() {
-        MatcherAssert.assertThat(order.getPetId(), Matchers.is(198772));
+        MatcherAssert.assertThat(orderResponse.getPetId(), Matchers.is(198772));
     }
 
     @Test
     @DisplayName("Check if quantity is 7")
     public void checkQuantity() {
-        MatcherAssert.assertThat(order.getQuantity(), Matchers.is(7));
+        MatcherAssert.assertThat(orderResponse.getQuantity(), Matchers.is(7));
     }
 
     @Test
     @DisplayName("Check if shipDate is 2024-09-10T14:49:33.773+00:00")
     public void checkShipDate() {
-        MatcherAssert.assertThat(order.getShipDate(), Matchers.containsString("2024-09-10T14:49:33.773"));
+        MatcherAssert.assertThat(orderResponse.getShipDate(), Matchers.containsString("2024-09-10T14:49:33.773"));
     }
 
     @Test
     @DisplayName("Check if status is approved")
     public void checkStatus() {
-        MatcherAssert.assertThat(order.getStatus(), Matchers.is("approved"));
+        MatcherAssert.assertThat(orderResponse.getStatus(), Matchers.is("approved"));
     }
 
     @Test
     @DisplayName("Check if complete is true")
     public void checkComplete() {
-        MatcherAssert.assertThat(order.isComplete(), Matchers.is(true));
+        MatcherAssert.assertThat(orderResponse.isComplete(), Matchers.is(true));
     }
 
 }
