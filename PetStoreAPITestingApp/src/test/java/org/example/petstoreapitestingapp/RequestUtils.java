@@ -65,12 +65,4 @@ public class RequestUtils {
                 .setBody(body)
                 .build();
     }
-
-    public static RequestSpecification deleteRequestSpec(String baseUri, String path, Map<String, String> headers, Map<String, String> pathParams) {
-        return getRequestSpec(baseUri, path, headers, pathParams);
-    }
-
-    public static RequestSpecification putRequestSpec(String baseUri, String path, Map<String, String> headers, Map<String, String> pathParams, Map<String, ?> body) {
-        return postRequestSpec(baseUri, path, headers, pathParams, body);
-    }
 }
