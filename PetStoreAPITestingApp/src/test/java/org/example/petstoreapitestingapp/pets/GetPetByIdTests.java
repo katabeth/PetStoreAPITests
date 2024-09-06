@@ -88,4 +88,37 @@ public class GetPetByIdTests extends PetsTestBase {
                 .thenReturn();
         MatcherAssert.assertThat(badRequestResponse.statusCode(), Matchers.is(400));
     }
+
+    @Test
+    void testResponseTimeIsWithinLimit() {
+        MatcherAssert.assertThat(response.time(), Matchers.lessThan(2000L));
+    }
+
+    @Test
+    void testEmptyPetIdReturns405() {
+        Response emptyIdResponse = RestAssured
+                .given(RequestUtils.getRequestSpec(
+                        BASE_URI,
+                        PATH_UNDER_TEST,
+                        Map.of("petId", "")
+                ))
+                .when()
+                .get()
+                .thenReturn();
+        MatcherAssert.assertThat(emptyIdResponse.statusCode(), Matchers.is(405));
+    }
+
+    @Test
+    void testMediaTypeOfXMLReturns200() {
+        Response xmlMediaTypeResponse = RestAssured
+                .given(RequestUtils.getRequestSpec(
+                        BASE_URI,
+                        PATH_UNDER_TEST,
+                        Map.of("petId", "55")
+                ).contentType("application/xml"))
+                .when()
+                .get()
+                .thenReturn();
+        MatcherAssert.assertThat(xmlMediaTypeResponse.statusCode(), Matchers.is(200));
+    }
 }
