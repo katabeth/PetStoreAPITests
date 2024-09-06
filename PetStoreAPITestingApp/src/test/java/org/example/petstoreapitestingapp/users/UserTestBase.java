@@ -9,7 +9,7 @@ import org.example.petstoreapitestingapp.pojo.User;
 import java.util.Map;
 
 public class UserTestBase extends TestBase {
-    protected static final String GET_USER_PATH = "/user/{username}";
+    protected static final String GET_USER_PATH = "user/{username}";
     protected String username;
     protected static User userResponse;
     protected static User[] userResponseList;
