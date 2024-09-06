@@ -22,11 +22,7 @@ jobs:
         distribution: 'temurin'  
         java-version: '21'       
 
-    - name: List directories
-      run: ls -la
-
     - name: Build with Maven (Skip tests)
       run: |
         cd PetStoreAPITestingApp
-        ls -la  # Check the contents of PetStoreAPITestingApp directory
-        mvn clean install -DskipTests
+        mvn clean install
