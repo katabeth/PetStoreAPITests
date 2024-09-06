@@ -23,4 +23,6 @@ jobs:
         java-version: '21'       
 
     - name: Build with Maven (Skip tests)
-      run: mvn clean install -DskipTests
+      run: |
+        cd PetStoreAPITestingApp
+        mvn clean install

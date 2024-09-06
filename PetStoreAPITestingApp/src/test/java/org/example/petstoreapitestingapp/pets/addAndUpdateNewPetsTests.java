@@ -41,21 +41,13 @@ public class addAndUpdateNewPetsTests extends PetsTestBase{
                 "available"
         );
     }
-    @AfterAll
-    public static void tearDown() {
-
-    }
 
     @Test
     @Order(1)
     @DisplayName("Add new pet to the store")
     public void addNewPet() {
         response = RestAssured
-                .given(RequestUtils.petRequestSpec(
-                BASE_URI,
-                PATH,
-                newPet
-                ))
+                .given(RequestUtils.petRequestSpec(BASE_URI, PATH, newPet))
                 .when()
                 .post()
                 .thenReturn();
@@ -74,11 +66,7 @@ public class addAndUpdateNewPetsTests extends PetsTestBase{
     @DisplayName("Update pet in the store")
     public void updatePet() {
         response = RestAssured
-                .given(RequestUtils.petRequestSpec(
-                        PetsTestBase.BASE_URI,
-                        PATH,
-                        updatePet
-                ))
+                .given(RequestUtils.petRequestSpec(PetsTestBase.BASE_URI, PATH, updatePet))
                 .when()
                 .put()
                 .thenReturn();
@@ -90,5 +78,5 @@ public class addAndUpdateNewPetsTests extends PetsTestBase{
     @DisplayName("Check update gives correct name")
     public void checkUpdateGivesCorrectName() {
         MatcherAssert.assertThat(returnedPet.getName(), org.hamcrest.Matchers.is("Potatoes"));
-        }
+    }
 }

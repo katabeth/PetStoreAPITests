@@ -21,7 +21,7 @@ public class GetPetByIdTests extends PetsTestBase {
                 .given(RequestUtils.getRequestSpec(
                         BASE_URI,
                         PATH_UNDER_TEST,
-                        Map.of("petId", "12")
+                        Map.of("petId", "55")
                 ))
                 .when()
                 .get()
@@ -32,7 +32,7 @@ public class GetPetByIdTests extends PetsTestBase {
 
     @Test
     void testPetHasAnIdOf1() {
-        MatcherAssert.assertThat(petResponse.getId(), Matchers.is(12));
+        MatcherAssert.assertThat(petResponse.getId(), Matchers.is(55L));
     }
 
     @Test
@@ -42,7 +42,7 @@ public class GetPetByIdTests extends PetsTestBase {
 
     @Test
     void testPetCategoryIsDogs() {
-        MatcherAssert.assertThat(petResponse.getCategory().getName(), Matchers.equalTo("Cats"));
+        MatcherAssert.assertThat(petResponse.getCategory().getName(), Matchers.equalTo("Dogs"));
     }
 
     @Test
@@ -87,5 +87,38 @@ public class GetPetByIdTests extends PetsTestBase {
                 .get()
                 .thenReturn();
         MatcherAssert.assertThat(badRequestResponse.statusCode(), Matchers.is(400));
+    }
+
+    @Test
+    void testResponseTimeIsWithinLimit() {
+        MatcherAssert.assertThat(response.time(), Matchers.lessThan(2000L));
+    }
+
+    @Test
+    void testEmptyPetIdReturns405() {
+        Response emptyIdResponse = RestAssured
+                .given(RequestUtils.getRequestSpec(
+                        BASE_URI,
+                        PATH_UNDER_TEST,
+                        Map.of("petId", "")
+                ))
+                .when()
+                .get()
+                .thenReturn();
+        MatcherAssert.assertThat(emptyIdResponse.statusCode(), Matchers.is(405));
+    }
+
+    @Test
+    void testMediaTypeOfXMLReturns200() {
+        Response xmlMediaTypeResponse = RestAssured
+                .given(RequestUtils.getRequestSpec(
+                        BASE_URI,
+                        PATH_UNDER_TEST,
+                        Map.of("petId", "55")
+                ).contentType("application/xml"))
+                .when()
+                .get()
+                .thenReturn();
+        MatcherAssert.assertThat(xmlMediaTypeResponse.statusCode(), Matchers.is(200));
     }
 }
