@@ -24,8 +24,6 @@ public class uploadingImageTest extends PetsTestBase{
 //            -H 'Content-Type: application/octet-stream' \
 //            --data-binary '@380px-Disguise_Self_Masc_Human.webp.png'
 
-    // Perform the POST request with the image as multipart form-data
-    // Log the response
     @Test
     @Order(1)
     @DisplayName("Add an image to an existing pet gives 200 response")
@@ -35,12 +33,10 @@ public class uploadingImageTest extends PetsTestBase{
                 .contentType(ContentType.BINARY)// Set content type as BINARY
                 .body(file)
                 .when()
-                .post() // API endpoint for uploading the image
+                .post()
                 .thenReturn();
         response.prettyPrint();
-        //returnedPet = response.as(Pet.class);
         MatcherAssert.assertThat(response.getStatusCode(), org.hamcrest.Matchers.is(200));
-
     }
 
 }

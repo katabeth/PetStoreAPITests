@@ -13,14 +13,8 @@ import java.util.Map;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class updatePetByIDTests extends PetsTestBase {
     private static Response response;
-    private static final String PATH = "/pet/{id}?";
+    private static final String PATH = "/pet/{petId}?";
     private static Pet returnedPet;
-    @BeforeAll
-    public static void setUp() {
-    }
-    @AfterAll
-    public static void tearDown() {
-    }
 
     @Test
     @Order(1)
