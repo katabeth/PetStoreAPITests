@@ -24,17 +24,9 @@ public class uploadingImageTest extends PetsTestBase{
 //            -H 'accept: application/json' \
 //            -H 'Content-Type: application/octet-stream' \
 //            --data-binary '@380px-Disguise_Self_Masc_Human.webp.png'
-    @BeforeAll
-    public static void setUp() {
-
-    }
-    @AfterAll
-    public static void tearDown() {
-    }
-
 
     // Perform the POST request with the image as multipart form-data
-     // Log the response
+    // Log the response
     @Test
     @Order(1)
     @DisplayName("Add an image to an existing pet gives 200 response")
@@ -44,9 +36,7 @@ public class uploadingImageTest extends PetsTestBase{
                 .baseUri(BASE_URI)
                 .basePath(PATH)
                 .pathParam("petId", 55)
-                 // Attach the image as a multiPart field
-                 // Add metadata as multipart field
-                .contentType(ContentType.BINARY)// Set content type as multipart/form-data
+                .contentType(ContentType.BINARY)// Set content type as BINARY
                 .body(file)
                 .when()
                 .post() // API endpoint for uploading the image
