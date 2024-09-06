@@ -22,9 +22,14 @@ jobs:
         distribution: 'temurin'  
         java-version: '21'       
 
-    - name: cd into project
+    - name: List directories
+      run: ls -la
+
+    - name: cd into PetStoreAPITestingApp
       run: cd PetStoreAPITestingApp
-      
+
+    - name: List directories
+      run: ls -la
 
     - name: Build with Maven (Skip tests)
       run: mvn clean install -DskipTests
