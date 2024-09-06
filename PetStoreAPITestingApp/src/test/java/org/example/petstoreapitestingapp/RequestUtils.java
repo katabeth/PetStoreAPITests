@@ -55,6 +55,16 @@ public class RequestUtils {
                 .setBody(body)
                 .build();
     }
+    public static RequestSpecification petIDRequestSpec(String baseUri, String path, int pathParam) {
+        return new RequestSpecBuilder()
+                .setBaseUri(baseUri)
+                .setBasePath(path)
+                .addPathParams(Map.of(
+                        "id", pathParam
+                        ))
+                .build();
+    }
+
     public static RequestSpecification deleteRequestSpec(String baseUri, String path, Map<String, String> headers, Map<String, String> pathParams) {
         return getRequestSpec(baseUri, path, headers, pathParams);
     }

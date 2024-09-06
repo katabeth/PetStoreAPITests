@@ -4,6 +4,7 @@ package org.example.petstoreapitestingapp.pets;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
+import org.example.petstoreapitestingapp.RequestUtils;
 import org.example.petstoreapitestingapp.pojo.Pet;
 import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.*;
@@ -16,8 +17,6 @@ public class uploadingImageTest extends PetsTestBase{
 
     private static Response response;
     private static final String PATH = "/pet/{petId}/uploadImage";
-    private static Pet returnedPet;
-    File imageFile = new File("path/to/your/image.jpg");
     File file = new File("src/test/resources/cult_fanatic.png");
 //    curl -X 'POST' \
 //            'https://petstore3.swagger.io/api/v3/pet/55/uploadImage' \
@@ -32,10 +31,7 @@ public class uploadingImageTest extends PetsTestBase{
     @DisplayName("Add an image to an existing pet gives 200 response")
     public void addAnImageToAnExistingPetGives200Response() {
         response = RestAssured
-                .given()
-                .baseUri(BASE_URI)
-                .basePath(PATH)
-                .pathParam("petId", 55)
+                .given(RequestUtils.petIDRequestSpec(BASE_URI, PATH, 55))
                 .contentType(ContentType.BINARY)// Set content type as BINARY
                 .body(file)
                 .when()
