@@ -37,6 +37,7 @@ public class RequestUtils {
                 .setBody(body)
                 .build();
     }
+
     public static RequestSpecification postRequestSpecList(String baseUri, String path, Map<String, String> headers, Map<String, String> pathParams, Map<String, ?>[] body) {
         return new RequestSpecBuilder()
                 .setBaseUri(baseUri)
@@ -47,6 +48,7 @@ public class RequestUtils {
                 .setBody(body)
                 .build();
     }
+
     public static RequestSpecification petRequestSpec(String baseUri, String path, Pet body) {
         return new RequestSpecBuilder()
                 .setBaseUri(baseUri)
@@ -55,6 +57,7 @@ public class RequestUtils {
                 .setBody(body)
                 .build();
     }
+
     public static RequestSpecification deleteRequestSpec(String baseUri, String path, Map<String, String> headers, Map<String, String> pathParams) {
         return getRequestSpec(baseUri, path, headers, pathParams);
     }
