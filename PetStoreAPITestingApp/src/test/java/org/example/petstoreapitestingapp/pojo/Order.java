@@ -22,6 +22,9 @@ public class Order{
 	@JsonProperty("status")
 	private String status;
 
+	public Order() {
+	}
+
 	public int getPetId(){
 		return petId;
 	}

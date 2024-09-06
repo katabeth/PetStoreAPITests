@@ -15,7 +15,7 @@ import java.util.Map;
 
 public class GetPetStoreOrderIdTests extends StoreTestBase {
     private static Response response;
-    private static final int TEST_ORDER_ID = 1;
+    private static final int TEST_ORDER_ID = 2;
 
     @BeforeAll
     public static void beforeAll() {
