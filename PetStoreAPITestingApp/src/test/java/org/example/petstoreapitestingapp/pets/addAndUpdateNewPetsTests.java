@@ -41,10 +41,6 @@ public class addAndUpdateNewPetsTests extends PetsTestBase{
                 "available"
         );
     }
-    @AfterAll
-    public static void tearDown() {
-
-    }
 
     @Test
     @Order(1)
