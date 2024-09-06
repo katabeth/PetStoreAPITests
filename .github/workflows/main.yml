@@ -22,5 +22,8 @@ jobs:
         distribution: 'temurin'  
         java-version: '21'       
 
+    - name: List directories
+      run: ls -la
+
     - name: Build with Maven (Skip tests)
       run: mvn clean install -DskipTests
