@@ -25,11 +25,8 @@ jobs:
     - name: List directories
       run: ls -la
 
-    - name: cd into PetStoreAPITestingApp
-      run: cd PetStoreAPITestingApp
-
-    - name: List directories
-      run: ls -la
-
     - name: Build with Maven (Skip tests)
-      run: mvn clean install -DskipTests
+      run: |
+        cd PetStoreAPITestingApp
+        ls -la  # Check the contents of PetStoreAPITestingApp directory
+        mvn clean install -DskipTests
