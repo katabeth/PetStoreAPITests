@@ -21,7 +21,7 @@ public class GetPetByIdTests extends PetsTestBase {
                 .given(RequestUtils.getRequestSpec(
                         BASE_URI,
                         PATH_UNDER_TEST,
-                        Map.of("petId", "12")
+                        Map.of("petId", "55")
                 ))
                 .when()
                 .get()
@@ -32,7 +32,7 @@ public class GetPetByIdTests extends PetsTestBase {
 
     @Test
     void testPetHasAnIdOf1() {
-        MatcherAssert.assertThat(petResponse.getId(), Matchers.is(12));
+        MatcherAssert.assertThat(petResponse.getId(), Matchers.is(55L));
     }
 
     @Test
@@ -42,7 +42,7 @@ public class GetPetByIdTests extends PetsTestBase {
 
     @Test
     void testPetCategoryIsDogs() {
-        MatcherAssert.assertThat(petResponse.getCategory().getName(), Matchers.equalTo("Cats"));
+        MatcherAssert.assertThat(petResponse.getCategory().getName(), Matchers.equalTo("Dogs"));
     }
 
     @Test
