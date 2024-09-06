@@ -29,7 +29,10 @@ public class uploadingImageTest extends PetsTestBase{
     @DisplayName("Add an image to an existing pet gives 200 response")
     public void addAnImageToAnExistingPetGives200Response() {
         response = RestAssured
-                .given(RequestUtils.petIDRequestSpec(BASE_URI, PATH, 55))
+                .given(RequestUtils.getRequestSpec(
+                                BASE_URI,
+                                PATH,
+                                Map.of("petId", "55"))
                 .contentType(ContentType.BINARY)// Set content type as BINARY
                 .body(file)
                 .when()

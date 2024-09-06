@@ -21,7 +21,10 @@ public class updatePetByIDTests extends PetsTestBase {
     @DisplayName("200 response code from update pet by ID")
     public void updatePetByIDResponseCode() {
         response = RestAssured
-                .given(RequestUtils.petIDRequestSpec(BASE_URI, PATH, 55))
+                .given(RequestUtils.getRequestSpec(
+                        BASE_URI,
+                        PATH,
+                        Map.of("petId", "55")))
                 .queryParams(Map.of(
                         "name","Charles",
                         "status","pending"))
