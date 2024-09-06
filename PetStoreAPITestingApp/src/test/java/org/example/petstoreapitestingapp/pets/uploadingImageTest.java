@@ -32,7 +32,7 @@ public class uploadingImageTest extends PetsTestBase{
                 .given(RequestUtils.getRequestSpec(
                                 BASE_URI,
                                 PATH,
-                                Map.of("petId", "55"))
+                                Map.of("petId", "55")))
                 .contentType(ContentType.BINARY)// Set content type as BINARY
                 .body(file)
                 .when()
